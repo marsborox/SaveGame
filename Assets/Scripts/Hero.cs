@@ -9,7 +9,7 @@ public class Hero : MonoBehaviour
 
     private void Start()
     {
-        //GameSaveLoadSystem.instance.SaveObject(this);
+        
     }
 
     public HeroSaveData SaveHero()

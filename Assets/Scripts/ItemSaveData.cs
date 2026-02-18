@@ -1,6 +1,5 @@
 using MessagePack;
 
-using UnityEngine;
 [MessagePackObject]
 public class ItemSaveData
 {

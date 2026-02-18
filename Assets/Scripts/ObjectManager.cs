@@ -1,10 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-
-using UnityEngine;
-
-
 public class ObjectManager : Singleton<ObjectManager>
 {
     public static new ObjectManager instance => Singleton<ObjectManager>.instance;

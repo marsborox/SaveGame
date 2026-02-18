@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UI : MonoBehaviour
 {
-
     public Button saveHeroButton;
     public Button loadHeroButton;
     public Button spawn5Randoms;
