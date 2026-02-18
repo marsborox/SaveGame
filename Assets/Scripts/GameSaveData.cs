@@ -6,12 +6,5 @@ using MessagePack;
 public class GameSaveData
 {
     [Key(0)] public List<HeroSaveData> heroSaveList = new List<HeroSaveData>();
-
-    
-    [Key(1)] public readonly int level;
-    [Key(2)] public readonly int health;
-    [Key(3)] public readonly float[] position;
-
-
-   
+    [Key(1)] public List<ItemSaveData> itemSaveList = new List<ItemSaveData>();
 }

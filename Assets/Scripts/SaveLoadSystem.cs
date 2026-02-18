@@ -44,7 +44,7 @@ public class SaveLoadSystem : Singleton<SaveLoadSystem>
     public void SaveAllHeroes()
     {
         GameSaveData data = new GameSaveData();
-        foreach (Hero hero in HeroManager.instance.heroList)
+        foreach (Hero hero in ObjectManager.instance.heroList)
         {
             HeroSaveData heroData = hero.SaveHero();
             data.heroSaveList.Add(heroData);
@@ -60,16 +60,58 @@ public class SaveLoadSystem : Singleton<SaveLoadSystem>
         {
             byte[] bytes = File.ReadAllBytes(savePath);
             data = MessagePackSerializer.Deserialize<GameSaveData>(bytes);
+
+            foreach (HeroSaveData heroData in data.heroSaveList)
+            { 
+                ObjectManager.instance.SpawnHeroFromLoad(heroData);
+            }
         }
         else
         {
             Debug.Log("SaveFile not found in" + savePath);
             
         }
-        foreach (HeroSaveData heroData in data.heroSaveList)
-        { 
-            HeroManager.instance.SpawnHeroFromLoad(heroData);
-        }
     }
 
+    public void SaveAll()
+    {
+        GameSaveData data = new GameSaveData();
+        foreach (Hero hero in ObjectManager.instance.heroList)
+        {
+            HeroSaveData heroData = hero.SaveHero();
+            data.heroSaveList.Add(heroData);
+        }
+        foreach (Item item in ObjectManager.instance.itemList)
+        { 
+            ItemSaveData itemData = item.SaveItem();
+            data.itemSaveList.Add(itemData);
+        }
+        byte[] bytes = MessagePackSerializer.Serialize(data);
+        File.WriteAllBytes(savePath, bytes);
+    }
+    public void LoadAll()
+    {
+        GameSaveData data = new GameSaveData();
+
+        if (File.Exists(savePath))
+        {
+            byte[] bytes = File.ReadAllBytes(savePath);
+            data = MessagePackSerializer.Deserialize<GameSaveData>(bytes);
+            //load items first we will be assigning them w heroes
+            foreach (ItemSaveData itemData in data.itemSaveList)
+            { 
+                ObjectManager.instance.SpawnItemFromLoad(itemData);
+            }
+            //load heroes and assign them items
+            foreach (HeroSaveData heroData in data.heroSaveList)
+            {
+                ObjectManager.instance.SpawnHeroFromLoad(heroData);
+            }
+        }
+        else
+        {
+            Debug.Log("SaveFile not found in" + savePath);
+
+        }
+    }
 }

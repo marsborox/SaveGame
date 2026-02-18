@@ -6,20 +6,20 @@ public class UI : MonoBehaviour
 
     public Button saveHeroButton;
     public Button loadHeroButton;
-    public Button spawn5Heros;
-    public Button destroyAllHeros;
-    public Button saveAllHeros;
-    public Button loadAllHeros;
+    public Button spawn5Randoms;
+    public Button destroyAll;
+    public Button saveAll;
+    public Button loadAll;
 
     public Hero hero;
     private void Start()
     {
-        InitiateButton(saveHeroButton, hero.SaveThisHero);
-        InitiateButton(loadHeroButton,hero.LoadHero);
-        InitiateButton(spawn5Heros, HeroManager.instance.Spawn5Heros);
-        InitiateButton(destroyAllHeros, HeroManager.instance.DestoryAllHeroes);
-        InitiateButton(saveAllHeros, SaveLoadSystem.instance.SaveAllHeroes);
-        InitiateButton(loadAllHeros, SaveLoadSystem.instance.LoadAllHeroes);
+        //InitiateButton(saveHeroButton, hero.SaveThisHero);
+        //InitiateButton(loadHeroButton,hero.LoadHero);
+        InitiateButton(spawn5Randoms, ObjectManager.instance.Spawn5Randoms);
+        InitiateButton(destroyAll, ObjectManager.instance.DestoryAll);
+        InitiateButton(saveAll, SaveLoadSystem.instance.SaveAll);
+        InitiateButton(loadAll, SaveLoadSystem.instance.LoadAll);
     }
 
     public void InitiateButton(Button button, Action method)

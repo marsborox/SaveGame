@@ -8,6 +8,8 @@ public class HeroSaveData
     [Key(2)] public int health;
     [Key(3)] public Vector3 position;
 
+    [Key(4)] public string itemName;
+
     [SerializationConstructor]
     public HeroSaveData()
     { }
